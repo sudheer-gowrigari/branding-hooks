@@ -1,0 +1,23 @@
+<template>
+    <template if:true={showBaseBrand}>
+        <button class="slds-button base-button" href="#">Base Button</button>
+    </template>
+    <template if:true={showNeutral}>
+        <button class="slds-button slds-button_neutral neutral-button" href="#">Neutral Button</button>
+    </template>
+    <template if:true={showBrand}>
+        <button class="slds-button slds-button_brand brand-button" href="#">Brand Button</button>
+    </template>
+    <template if:true={showOutlineBrand}>
+        <button class="slds-button slds-button_outline-brand outline-button" href="#">Outline Brand Button</button>
+    </template>
+    <template if:true={showDestructiveBrand}>
+        <button class="slds-button slds-button_destructive destructive-button" href="#">Destructive Button</button>
+    </template>
+    <template if:true={showTextDestructiveButton}>
+        <button class="slds-button slds-button_text-destructive text-destructive-button" href="#">Text Destructive Button</button>
+    </template>
+    <template if:true={showSuccessButton}>
+        <button class="slds-button slds-button_success success-button" href="#">Success Button</button>
+    </template>
+</template>

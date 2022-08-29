@@ -1,0 +1,18 @@
+<template>
+    <div class="slds-grid slds-align_absolute-center">
+        <div class="slds-col slds-size_5-of-12">
+            <lightning-input type="color" name="backgroundColor" value={selectedColorStyle} label=" " onchange={handleColorChange}></lightning-input>
+        </div>
+        
+    </div>
+    <div class="slds-grid slds-align_absolute-center slds-m-top_medium">
+        <span>Brand-Based Color Palette</span>
+    </div>
+    <div class="slds-grid slds-align_absolute-center slds-m-top_medium">
+        <template for:each={derivedColors} for:item="derivedColor">
+            <div class="palette slds-m-left_x-small" style={derivedColor.style} key={derivedColor.id}>
+                <span class="slds-assistive-text">{derivedColor.color}</span>
+            </div>
+        </template>
+    </div>
+</template>

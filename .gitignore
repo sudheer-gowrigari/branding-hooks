@@ -1,0 +1,4 @@
+node_modules
+public/assets
+*.error
+dist/*iconSvgTemplates*

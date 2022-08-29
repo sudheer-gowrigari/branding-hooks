@@ -1,0 +1,84 @@
+<template>
+    <header>
+        <div class="masthead">
+            <div class="subheader">
+                <img style="max-width:20%;"
+                    src="https://c1.sfdcstatic.com/content/dam/sfdc-docs/www/logos/logo-salesforce.svg" />
+            </div>
+            <h1>Block Styling Hooks Demo with Lightning Design System</h1>
+            <p class="lead">Develop a unique Lightning UI with Styling Hooks.</p>
+        </div>
+    </header>
+    <main>
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col slds-size_1-of-6">
+                <lightning-layout>
+                    <lightning-layout-item>
+                        <lightning-vertical-navigation selected-item={selectedItem} onselect={handleSelect}
+                            class="navigation" shaded>
+                            <lightning-vertical-navigation-section label="Theme Settings">
+                                <template for:each={themeSettings} for:item="setting">
+                                    <lightning-vertical-navigation-item key={setting.id} label={setting.label}
+                                        name={setting.name}></lightning-vertical-navigation-item>
+                                </template>
+                            </lightning-vertical-navigation-section>
+                        </lightning-vertical-navigation>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+            <div class="slds-col slds-size_1-of-6">
+                <template if:true={showColorSettings}>
+                    <lightning-layout>
+                        <lightning-layout-item>
+                            <lightning-vertical-navigation selected-item={selectedThemeColorSetting}
+                                onselect={handleThemeColorSelect} class="navigation" compact>
+                                <lightning-vertical-navigation-section label=" ">
+                                    <template for:each={themeColors} for:item="setting">
+                                        <lightning-vertical-navigation-item key={setting.id} label={setting.label}
+                                            name={setting.id}></lightning-vertical-navigation-item>
+                                    </template>
+                                </lightning-vertical-navigation-section>
+                            </lightning-vertical-navigation>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </template>
+                <template if:true={showButtonStyles}>
+                    <lightning-layout>
+                        <lightning-layout-item>
+                            <lightning-vertical-navigation selected-item={selectedButtonSetting}
+                                onselect={handleButtonSettingSelect} class="navigation" compact>
+                                <lightning-vertical-navigation-section label=" ">
+                                    <template for:each={buttonStyles} for:item="setting">
+                                        <lightning-vertical-navigation-item key={setting.id} label={setting.label}
+                                            name={setting.style}></lightning-vertical-navigation-item>
+                                    </template>
+                                </lightning-vertical-navigation-section>
+                            </lightning-vertical-navigation>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </template>
+            </div>
+            <div class="slds-col slds-size_1-of-3" style="border-right: 1px solid #e7e7e7;">
+                <lightning-layout-item padding="around-medium">
+                    <template if:true={showColorSettings}>
+                        <demo-color-themes color-styles={themeColors} active-theme-color={selectedThemeColorSetting}>
+                        </demo-color-themes>
+                    </template>
+                    <template if:true={showButtonThemes}>
+                        <demo-button-styles button-styles={buttonStyles} active-button-style={selectedButtonSetting}
+                            theme-styles={themeStyles}></demo-button-styles>
+                    </template>
+                </lightning-layout-item>
+            </div>
+            <template if:true={showButtonPreview}>
+                <div class="slds-col">
+                    <lightning-layout-item padding="around-medium">
+                        <demo-button-preview button-styles={buttonStyles} active-button-style={selectedButtonSetting}>
+                        </demo-button-preview>
+                    </lightning-layout-item>
+                </div>
+            </template>
+        </div>
+    </main>
+
+</template>

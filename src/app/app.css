@@ -1,0 +1,51 @@
+:host {
+  --tdx21-text-color: #303030;
+  --tdx21-color-brand: #250f8f;
+  display: block;
+}
+
+main {
+  display: block;
+  width: 80%;
+  margin: auto;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.h2 {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 2.5rem;
+}
+
+.subheader {
+  font-size: 2rem;
+}
+
+.lead {
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+header {
+  background-color: #250f8f;
+  color: #fff;
+  margin-bottom: 6rem;
+  padding: 0 4.5rem;
+}
+
+.masthead {
+  margin: 0 auto;
+  padding: 2rem 0;
+  background-image: url('/public/images/astro-standing-desk.png');
+  background-repeat: no-repeat;
+  background-size: auto 124%;
+  background-position: right bottom -5rem;
+}
+
+.color-brand {
+  color: #2b8dbf;
+}

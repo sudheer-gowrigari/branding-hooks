@@ -1,0 +1,132 @@
+button{
+  width: 200px;
+  height: auto;
+  align-items: center;
+}
+.slds-button {
+  color: var(--sds-c-button-text-color, var(--lightning-default-color, #0176d3));
+}
+.slds-button:focus,
+.slds-button:hover {
+  color: var(--sds-c-button-text-color-hover, var(--dxp-s-button-color-hover, var(--lightning-primary-accent-color-root-1, #014486)));
+}
+.slds-button:focus {
+  box-shadow: var(--sds-c-button-shadow-focus, 0 0 3px var(--dxp-s-button-color-focus, var(--lightning-primary-accent-color-root-1, #0176d3)));
+}
+.slds-button:active {
+  color: var(--sds-c-button-text-color-active, var(--dxp-s-button-color-active, var(--lightning-primary-accent-color-root-1, #014486)));
+}
+.slds-button--neutral,
+.slds-button_neutral {
+  background-color: var(--sds-c-button-neutral-color-background, var(--lightning--button-neutral-color-root, #fff));
+  border-color: var(--sds-c-button-neutral-color-border, var(--lightning-neutral-color-root-1, #aeaeae));
+  color: var(--sds-c-button-brand-text-color, var(--lightning--button-neutral-color-contrast, #fff));
+  transition: var(--dxp-c-button-neutral-transition);
+}
+.slds-button--neutral:focus,
+.slds-button--neutral:hover,
+.slds-button_neutral:focus,
+.slds-button_neutral:hover {
+  background-color: var(--sds-c-button-neutral-color-background-hover, var(--lightning--button-neutral-color-root-1, var(--lightning-base-color-root-1, #f3f3f3)));
+  border-color: var(--sds-c-button-neutral-color-border-hover, var(--lightning--button-neutral-color-root-1, var(--lightning-neutral-color-root-2, #aeaeae)));
+  color: var(--sds-c-button-brand-text-color-hover, var(--lightning--button-neutral-color-contrast-1, var(--lightning-neutral-color-contrast-1, #fff)));
+  
+}
+.slds-button--neutral:active,
+.slds-button_neutral:active {
+  background-color: var(--sds-c-button-neutral-color-background-active, var(--lightning--button-neutral-color-root-1, var(--lightning-base-color-root-1, #e5e5e5)));
+  border-color: var(--sds-c-button-neutral-color-border-active, var(--lightning--button-neutral-color-root-1, var(--lightning-neutral-color-root-2, #aeaeae)));
+  color: var(--sds-c-button-text-color-active, var(--lightning--button-neutral-color-contrast-1, var(--lightning-primary-accent-color-root-1, #014486)));
+}
+.slds-button--brand,
+.slds-button_brand {
+  background-color: var(--sds-c-button-brand-color-background, var(--lightning--button-brand-color-root, #0176d3));
+  border-color: var(--sds-c-button-brand-color-border, var(--lightning--button-brand-color-root, #0176d3));
+  color: var(--sds-c-button-brand-text-color, var(--lightning--button-brand-color-contrast, #fff));
+  transition: var(--dxp-c-button-brand-transition);
+}
+.slds-button--brand:focus,
+.slds-button--brand:hover,
+.slds-button_brand:focus,
+.slds-button_brand:hover {
+  background-color: var(--sds-c-button-brand-color-background-hover, var(--lightning--button-brand-color-root-1, var(--lightning-primary-accent-color-root-1, #014486)));
+  border-color: var(--sds-c-button-brand-color-border-hover, var(--lightning--button-brand-color-root-1, var(--lightning-primary-accent-color-root-1, #014486)));
+  color: var(--sds-c-button-brand-text-color-hover, var(--lightning--button-brand-color-contrast-1, var(--lightning-brand-color-contrast-1, #fff)));
+}
+.slds-button--brand:active,
+.slds-button_brand:active {
+  background-color: var(--sds-c-button-brand-color-background-active, var(--lightning--button-brand-color-root-1, var(--lightning-primary-accent-color-root-1, #014486)));
+  border-color: var(--sds-c-button-brand-color-border-active, var(--lightning--button-brand-color-root-1, var(--lightning-primary-accent-color-root-1, #014486)));
+  color: var(--sds-c-button-brand-text-color-active, var(--lightning--button-brand-color-contrast-1, var(--lightning-brand-color-contrast-1, #fff)));
+}
+
+.slds-button--destructive,
+.slds-button_destructive {
+  background-color: var(--sds-c-button-destructive-color-background, var(--lightning--button-destructive-color-root, #ba0517));
+  border-color: var(--sds-c-button-destructive-color-border, var(--lightning--button-destructive-color-root, #ba0517));
+  color: var(--sds-c-button-destructive-text-color, var(--lightning--button-destructive-color-contrast, #fff));
+  transition: var(--dxp-c-button-destructive-transition);
+}
+.slds-button--destructive:focus,
+.slds-button--destructive:hover,
+.slds-button_destructive:focus,
+.slds-button_destructive:hover {
+  background-color: var(--sds-c-button-destructive-color-background-hover,var(--lightning--button-destructive-color-root-1, var(--lightning-destructive-color-root-1, #ba0517)));
+  border-color: var(--sds-c-button-destructive-color-border-hover, var(--lightning--button-destructive-color-root-1, var(--lightning-destructive-color-root-1, #ba0517)));
+  color: var(--sds-c-button-destructive-text-color-hover,var(--lightning--button-destructive-color-contrast-1, var(--lightning-destructive-color-contrast-1, #fff)));
+}
+.slds-button--destructive:active,
+.slds-button_destructive:active {
+  background-color: var(--sds-c-button-destructive-color-background-active,var(--lightning--button-destructive-color-root-1, var(--lightning-destructive-color-root-1, #8e030f)));
+  border-color: var(--sds-c-button-destructive-color-border-active,var(--lightning--button-destructive-color-root-1, var(--lightning-destructive-color-root-1, #8e030f)));
+  color: var(--sds-c-button-destructive-text-color-active,var(--lightning--button-destructive-color-contrast-1, var(--lightning-destructive-color-contrast-1, #fff)));
+}
+
+.slds-button--success,
+.slds-button_success {
+  background-color: var(--sds-c-button-success-color-background, var(--lightning--button-success-color-root, #45c65a));
+  border-color: var(--sds-c-button-success-color-border, var(--lightning--button-success-color-root, #91db8b));
+  color: var(--sds-c-button-success-text-color, var(--lightning--button-success-color-contrast, #181818));
+  transition: var(--dxp-c-button-success-transition);
+}
+.slds-button--success:focus,
+.slds-button--success:hover,
+.slds-button_success:focus,
+.slds-button_success:hover {
+  background-color: var(--sds-c-button-success-color-background-hover, var(--lightning--button-success-color-root-1, var(--lightning-success-color-root-1, #2e844a)));
+  border-color: var(--sds-c-button-success-color-border-hover, var(--lightning--button-success-color-root-1, var(--lightning-success-color-root-1, #2e844a)));
+  color: var(--sds-c-button-success-text-color-hover, var(--lightning--button-success-color-contrast-1, var(--lightning-success-color-contrast-1, #fff)));
+}
+.slds-button--success:active,
+.slds-button_success:active {
+  background-color: var(--sds-c-button-success-color-background-active,var(--lightning--button-success-color-root-1, var(--lightning-success-color-root-1, #2e844a)));
+  border-color: var(--sds-c-button-success-color-border-active,var(--lightning--button-success-color-root-1, var(--lightning-success-color-root-1, #2e844a)));
+  color: var(--sds-c-button-success-text-color-active,var(--lightning--button-success-color-contrast-1, var(--lightning-success-color-contrast-1, #fff)));
+}
+/* Standard Button */
+/* .slds-button {
+  font-family: var(--dxp-s-button-font-family);
+  font-size: var(--dxp-s-button-font-size);
+  font-style: var(--dxp-s-button-font-style);
+  font-weight: var(--dxp-s-button-font-weight);
+  text-decoration: var(--dxp-s-button-text-decoration-active);
+  text-transform: var(--dxp-s-button-text-transform);
+  line-height: var(--dxp-s-button-line-height);
+  letter-spacing: var(--dxp-s-button-letter-spacing);
+  border-radius: var(--sds-c-button-radius-border, var(--dxp-s-button-radius-border, 0.25em));
+
+  --sds-c-button-brand-spacing-inline-start: var(--dxp-s-button-padding, 1em);
+  --sds-c-button-brand-spacing-inline-end: var(--dxp-s-button-padding, 1em);
+
+  --sds-c-button-outline-brand-spacing-inline-start: var(--dxp-s-button-padding, 1em);
+  --sds-c-button-outline-brand-spacing-inline-end: var(--dxp-s-button-padding, 1em);
+
+  --sds-c-button-destructive-spacing-inline-start: var(--dxp-s-button-padding, 1em);
+  --sds-c-button-destructive-spacing-inline-end: var(--dxp-s-button-padding, 1em);
+
+  --sds-c-button-text-destructive-spacing-inline-start: var(--dxp-s-button-padding, 1em);
+  --sds-c-button-text-destructive-spacing-inline-end: var(--dxp-s-button-padding, 1em);
+
+  --sds-c-button-success-spacing-inline-start: var(--dxp-s-button-padding, 1em);
+  --sds-c-button-success-spacing-inline-end: var(--dxp-s-button-padding, 1em);
+} */

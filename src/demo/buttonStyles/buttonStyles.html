@@ -1,0 +1,24 @@
+<template>
+    <lightning-accordion onsectiontoggle={handleSectionToggle} active-section-name={activeSections}>
+        <lightning-accordion-section name="A" label="Color">
+            <div class="slds-align_absolute-center" style="width: 35%;">
+                <lightning-combobox
+                    name="colorStyles"
+                    label=" "
+                    value={selectedColorStyle}
+                    placeholder="Choose color styles"
+                    options={colorStyles}
+                    onchange={handleColorStyleChange} >
+                </lightning-combobox>
+            </div>
+        </lightning-accordion-section>
+
+        <lightning-accordion-section name="B" label="Typography">
+            Font styles here....
+        </lightning-accordion-section>
+
+        <lightning-accordion-section name="C" label="Bounding Box">
+            Bounding Box styles here.....
+        </lightning-accordion-section>
+    </lightning-accordion>
+</template>

@@ -1,0 +1,45 @@
+{
+  "name": "style-hooks",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node ./server.js",
+    "build": "rollup --config",
+    "prebuild": "npm run copyAssets",
+    "precommit": "lint-staged",
+    "copyAssets": "node scripts/copyAssets.js",
+    "postinstall": "npm run copyAssets"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@lwc/compiler": "^1.7.14",
+    "@lwc/engine": "^1.7.14",
+    "@lwc/rollup-plugin": "^1.7.12",
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "@salesforce-ux/design-system": "2.14.0-rc.1",
+    "express": "^4.17.1",
+    "lightning-base-components": "^1.10.2-alpha",
+    "lwc": "^1.7.14",
+    "rollup": "^2.26.4",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-replace": "^2.2.0"
+  },
+  "devDependencies": {
+    "fs-extra": "^9.0.1",
+    "lint-staged": "^10.2.11"
+  },
+  "lint-staged": {
+    "*.{js}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "bracketSpacing": false,
+    "proseWrap": "never",
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "keywords": [],
+  "description": ""
+}

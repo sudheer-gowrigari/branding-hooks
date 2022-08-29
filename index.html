@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Global Styling Hooks -->
+    <style>
+      html {
+        /* Brand */
+        --sds-g-color-brand-base-1: #ffffff;
+        --sds-g-color-brand-base-2: #f1f3fd;
+        --sds-g-color-brand-base-3: #dee5fc;
+        --sds-g-color-brand-base-4: #b8c8f9;
+
+        --sds-g-color-brand-base-contrast-1: #5693f5;
+        --sds-g-color-brand-base-contrast-2: #2b74d0;
+        --sds-g-color-brand-base-contrast-3: #1e5ca7;
+        --sds-g-color-brand-base-contrast-4: #051732;
+
+        --sds-g-color-brand-inverse-1: #051732;
+        --sds-g-color-brand-inverse-2: #0e2e58;
+        --sds-g-color-brand-inverse-3: #16447e;
+        --sds-g-color-brand-inverse-4: #1e5ca7;
+
+        --sds-g-color-brand-inverse-contrast-1: #2b74d0;
+        --sds-g-color-brand-inverse-contrast-2: #5693f5;
+        --sds-g-color-brand-inverse-contrast-3: #8dadf7;
+        --sds-g-color-brand-inverse-contrast-4: #ffffff;
+
+        /* Neutral */
+        --sds-g-color-neutral-base-1: #ffffff;
+        --sds-g-color-neutral-base-2: #f3f3f3;
+        --sds-g-color-neutral-base-3: #e5e5e5;
+        --sds-g-color-neutral-base-4: #c9c9cb;
+
+        --sds-g-color-neutral-base-contrast-1: #929398;
+        --sds-g-color-neutral-base-contrast-2: #737479;
+        --sds-g-color-neutral-base-contrast-3: #5a5c61;
+        --sds-g-color-neutral-base-contrast-4: #181818;
+
+        --sds-g-color-neutral-inverse-1: #181818;
+        --sds-g-color-neutral-inverse-2: #2e2e30;
+        --sds-g-color-neutral-inverse-3: #444447;
+        --sds-g-color-neutral-inverse-4: #5a5c61;
+
+        --sds-g-color-neutral-inverse-contrast-1: #737479;
+        --sds-g-color-neutral-inverse-contrast-2: #929398;
+        --sds-g-color-neutral-inverse-contrast-3: #adaeb1;
+        --sds-g-color-neutral-inverse-contrast-4: #ffffff;
+
+        /* Fonts */
+        --sds-g-font-family: 'Salesforce Sans', -apple-system,
+          BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+        font-family: var(--sds-g-font-family);
+        font-size: 100%;
+        line-height: 1.5;
+        color: var(--sds-g-color-neutral-inverse-1);
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="public/assets/styles/salesforce-lightning-design-system.min.css"
+    />
+    <style>
+      html {
+        background-color: #fff;
+      }
+      body {
+        font-size: 1rem;
+      }
+
+      [part~='title'] {
+        display: flex;
+        justify-content: space-between;
+        min-width: 100%;
+      }
+    </style>
+    <title>Styling Hooks Demo</title>
+  </head>
+  <body>
+    <div id="main"></div>
+  </body>
+  <script src="dist/app.js" type="module"></script>
+</html>
