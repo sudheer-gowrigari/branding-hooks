@@ -50,6 +50,7 @@ const buttonMixinStyle = {
 const textStyles = {
   Heading1: {
     label: "Heading Extra LargeFont",
+    $ref: '$textStyles.Heading1',
     properties: {
       fontFamily: "Salesforce Sans",
       fontSize: "2.5rem",
@@ -61,6 +62,7 @@ const textStyles = {
   },
   Heading2: {
     label: "Heading LargeFont",
+    $ref: '$textStyles.Heading2',
     properties: {
       fontFamily: "Salesforce Sans",
       fontSize: "1.75rem",
@@ -72,6 +74,7 @@ const textStyles = {
   },
   BodyFontStyles: {
     label: "Body Font",
+    $ref: '$textStyles.BodyFontStyles',
     properties: {
       fontFamily: "Salesforce Sans",
       fontSize: "1rem",
@@ -279,7 +282,6 @@ class ButtonMixin {
       const textRendition = `${kebabCase(prop)}`
       let tokenName = `--${globalNamespace}-${buttonRendition}-${textRendition}`
       brandingStyleMap[tokenName] = `${textProps[prop]}`
-      console.log("token value ", tokenName)
     }
 
     for (let prop in colorProps) {
@@ -299,8 +301,6 @@ class ButtonMixin {
           i + 1
         )
       }
-
-      console.log("token value ", tokenName)
     }
 
     for (let key in boundingBox) {
@@ -321,12 +321,14 @@ const GlobalTheme = {
 }
 
 let brandingStyleMap = {}
+let brandingButtonStyleMap = {};
 globalButtonStyles.forEach((style) => {
   let buttonMixin = new ButtonMixin(style.id, style)
   const styleMap = buttonMixin.comuputeStyles()
+  brandingButtonStyleMap[style.style] = styleMap;
   brandingStyleMap = Object.assign(brandingStyleMap, styleMap)
 })
-
+//generating global theme tokens
 for (let key in GlobalTheme) {
   let tokenName = `--${globalNamespace}-${kebabCase(key)}`
   globalTokens[tokenName] = GlobalTheme[key]
@@ -385,7 +387,7 @@ function updateAppLevelCSSVars() {
 
 updateAppLevelCSSVars()
 
-var updatesCSSVars = function ({buttonStyle, colorStyle}) {
+var updatesCSSVars = function ({ buttonStyle, colorStyle }) {
   //update the button styles with choosen color style
   const requiredButtonStyle = globalButtonStyles
     .map((el) => {
@@ -395,18 +397,18 @@ var updatesCSSVars = function ({buttonStyle, colorStyle}) {
       return el
     })
     .find((el) => el.style === buttonStyle)
-  console.log(
-    "event details ",
-    buttonStyle,
-    colorStyle,
-    requiredButtonStyle,
-    globalButtonStyles
-  )
 
   let buttonMixin = new ButtonMixin(requiredButtonStyle.id, requiredButtonStyle)
   const styleMap = buttonMixin.comuputeStyles()
+  brandingButtonStyleMap[requiredButtonStyle.style] = styleMap;
   brandingStyleMap = Object.assign(brandingStyleMap, styleMap)
-  updateAppLevelCSSVars()
+  updateAppLevelCSSVars();
+  const reloadStyleHooksEvt = new CustomEvent('reload-style-hooks', {
+    detail: {
+      buttonStyleHooks: brandingButtonStyleMap
+    }
+  });
+  window.dispatchEvent(reloadStyleHooksEvt);
 }
 
 var getContrastColor = function (colorValue) {
@@ -425,7 +427,7 @@ var getContrastColor = function (colorValue) {
   return L > 0.179 ? "#000" : "#fff"
 }
 
-var updateThemeColors = function ({style, color}) {
+var updateThemeColors = function ({ style, color }) {
   console.log(" update theme color ", style, color)
   const themeColor = globalColorStyles[style]
   themeColor.root = color
@@ -465,4 +467,11 @@ function calcDerivedColorValues(
   }
   return newValues
 }
-export {globalButtonStyles, globalColorStyles}
+
+
+const ThemeJSON = {
+  colors: globalColorStyles,
+  lables: textStyles,
+  buttons: globalButtonStyles
+}
+export { globalButtonStyles, globalColorStyles, ThemeJSON , brandingStyleMap as stylingHooks, brandingButtonStyleMap as buttonStyleHooks}

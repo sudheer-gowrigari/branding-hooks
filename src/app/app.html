@@ -10,6 +10,18 @@
         </div>
     </header>
     <main>
+        <div class="slds-grid slds-align_absolute-center">
+            <div class="slds-col slds-size_1-of-3" style="max-height: 300px;overflow:scroll;">
+                <lightning-tabset>
+                    <lightning-tab label="Theme JSON" >
+                        <pre class="theme-json" lwc:dom="manual"></pre>
+                    </lightning-tab>
+                    <lightning-tab label="Style Hooks" onactive={handleStyleHooksActive}>
+                        <pre class="style-hooks" lwc:dom="manual"></pre>
+                    </lightning-tab>
+                </lightning-tabset>
+            </div>
+        </div>
         <div class="slds-grid slds-gutters">
             <div class="slds-col slds-size_1-of-6">
                 <lightning-layout>
@@ -75,6 +87,7 @@
                     <lightning-layout-item padding="around-medium">
                         <demo-button-preview button-styles={buttonStyles} active-button-style={selectedButtonSetting}>
                         </demo-button-preview>
+                        <pre class="button-style-hooks" lwc:dom="manual"></pre>
                     </lightning-layout-item>
                 </div>
             </template>

@@ -1,5 +1,5 @@
 import {LightningElement, track} from "lwc"
-import {globalButtonStyles, globalColorStyles} from "./buttonStyles"
+import {globalButtonStyles, globalColorStyles, ThemeJSON, stylingHooks, buttonStyleHooks} from "./buttonStyles"
 
 export default class App extends LightningElement {
   selectedItem = "colorstyles"
@@ -22,13 +22,27 @@ export default class App extends LightningElement {
       label: "Button Styles"
     }
   ]
+  connectedCallback(){
+    window.addEventListener("reload-style-hooks", (e) => this.populateButtonStyleHooks(e.detail))
+  }
+  disconnectedCallback(){
+    window.removeEventListener("reload-style-hooks", this.populateButtonStyleHooks)
+  }
+  renderedCallback(){
+    this.populateThemeJSON();
+    this.populateButtonStyleHooks();
+  }
 
   get themeSettings() {
     return this._themeSettings
   }
 
   get buttonStyles() {
-    return this._globalButtonStyles //this._buttonStyles;
+    return this._globalButtonStyles;
+  }
+
+  get buttonThemeStyleHooks(){
+    return buttonStyleHooks;
   }
   get themeStyles() {
     return {
@@ -78,5 +92,48 @@ export default class App extends LightningElement {
   handleButtonSettingSelect(event) {
     const selected = event.detail.name
     this.selectedButtonSetting = selected
+  }
+
+  populateThemeJSON(){
+    const options = {
+      collapsed: true,
+      rootCollapsable: false,
+      withQuotes: true,
+      withLinks: true
+    };
+    const themeJson = this.template.querySelector('pre.theme-json');
+    $(themeJson).jsonViewer(ThemeJSON, options);
+  }
+
+  handleStyleHooksActive(){
+    const options = {
+      collapsed: true,
+      rootCollapsable: false,
+      withQuotes: false,
+      withLinks: true
+    };
+    setTimeout(() => {
+      const styleHooks = this.template.querySelector('pre.style-hooks');
+      $(styleHooks).jsonViewer(stylingHooks, options);
+    });
+  }
+
+  populateButtonStyleHooks(detail){
+    if(!this.showButtonPreview){
+      return;
+    }
+    const options = {
+        collapsed: true,
+        rootCollapsable: false,
+        withQuotes: false,
+        withLinks: true
+    };
+    let styleHooks = buttonStyleHooks;
+    if(detail && detail.buttonStyleHooks){
+      styleHooks = detail.buttonStyleHooks
+    }
+    const hooks = JSON.parse(JSON.stringify(styleHooks[this.selectedButtonSetting]));
+    const styleHook = this.template.querySelector('pre.button-style-hooks');
+    $(styleHook).jsonViewer(hooks, options);
   }
 }
