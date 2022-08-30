@@ -1,4 +1,7 @@
 import * as tinyColor from "./tinyColor"
+const LIGHTNING_BUTTON = "lightning/button";
+const LIGHTNING_COLOR = "lightning/color";
+
 const colorMixin = {
   properties: {
     value: ""
@@ -99,12 +102,6 @@ let globalColorStyles = {
     root: "#005fb2",
     contrast: "#ffffff"
   },
-  // "brand": {
-  //     id: "brand",
-  //     "label": "Brand Color",
-  //     "root": "#0176d3",
-  //     "contrast": "#ffffff"
-  // },
   neutral: {
     id: "neutral",
     label: "Neutral Color",
@@ -140,8 +137,8 @@ const boundingboxStyles = {
     }
   }
 }
-let globalButtonStyles = [
-  {
+let globalButtonStyles = {
+  "neutral" : {
     label: "Neutral Button",
     id: "neutral",
     style: "NeutralButton",
@@ -151,7 +148,7 @@ let globalButtonStyles = [
       boundingbox: boundingboxStyles.even
     }
   },
-  {
+  "brand": {
     label: "Brand Button",
     id: "brand",
     style: "BrandButton",
@@ -161,7 +158,7 @@ let globalButtonStyles = [
       boundingbox: boundingboxStyles.even
     }
   },
-  {
+  "success": {
     label: "Success Button",
     id: "success",
     style: "SuccessButton",
@@ -171,7 +168,7 @@ let globalButtonStyles = [
       boundingbox: boundingboxStyles.even
     }
   },
-  {
+  "destructive": {
     id: "destructive",
     style: "DestructiveButton",
     label: "Destructive Button",
@@ -181,21 +178,7 @@ let globalButtonStyles = [
       boundingbox: boundingboxStyles.even
     }
   }
-  // {
-  //     id: 'test',
-  //     style: 'testButton',
-  //     label: 'Test Button',
-  //     properties: {
-  //         "typography" : textStyles.BodyFontStyles,
-  //         "color": {
-  //             "label": "test Color",
-  //             "root": "#c9c9c9",
-  //             "contrast": "#ea001e"
-  //         },
-  //         "boundingbox": boundingboxStyles.even
-  //     }
-  // }
-]
+}
 
 var formatToken = function (str, args) {
   // store arguments in an array
@@ -215,49 +198,7 @@ var kebabCase = function (str) {
 }
 
 let globalTokens = {}
-let globalColorTokens = {}
-const globalNamespace = "lightning"
-
-var generateGlobalThemeColorTokens = function () {
-  for (let key in globalColorStyles) {
-    const colorStyle = globalColorStyles[key]
-    for (let color in colorStyle) {
-      if (!colorStyle["derived"]) {
-        colorStyle["derived"] = {}
-      }
-      let tokenName = `--${globalNamespace}-${kebabCase(key)}-color-`
-      if (color !== "label" && color !== "id" && color !== "derived") {
-        tokenName += color
-        globalTokens[tokenName] = colorStyle[color]
-        globalColorTokens[`${key}-${color}`] = tokenName
-        const derivedColorValues = calcDerivedColorValues(
-          tokenName,
-          colorStyle[color],
-          colorStyle[color]
-        )
-        colorStyle["derived"][`${key}-${color}`] = derivedColorValues
-        console.log("derived color values for ", key, derivedColorValues)
-      }
-    }
-  }
-}
-//generate global color tokens
-generateGlobalThemeColorTokens()
-
-function getColorTokenValue(key, prop) {
-  if (globalColorTokens[`${key}-${prop}`]) {
-    return `var(${globalColorTokens[`${key}-${prop}`]});`
-  }
-  return
-}
-
-function getDerivedButtonColorToken(key, prop, index) {
-  if (globalColorTokens[`${key}-${prop}`]) {
-    return `var(${globalColorTokens[`${key}-${prop}`]}-${index});`
-  }
-  return
-}
-
+let globalColorTokens = {};
 class ButtonMixin {
   _variant = ""
   _styles = ""
@@ -267,14 +208,14 @@ class ButtonMixin {
     this._styles = styles
   }
 
-  comuputeStyles() {
-    console.log("variant ", this._variant, " styles : ", this._styles)
+  comuputeStyles(nameSpace) {
     const styleProperties = this._styles.properties
 
     const textProps = styleProperties["typography"].properties
     const colorProps = styleProperties["color"]
     const boundingBox = styleProperties["boundingbox"]
-    const buttonRendition = `-button-${this._variant}`
+    const buttonRendition = `${this._variant}`;
+    const globalNamespace = nameSpace.replace("/", "--");
 
     const brandingStyleMap = {}
 
@@ -307,32 +248,15 @@ class ButtonMixin {
       for (let prop in boundingBox[key]) {
         const boundingBoxRendition = `-${key}-${kebabCase(prop)}`
         let tokenName = `--${globalNamespace}-${buttonRendition}-${boundingBoxRendition}`
-        brandingStyleMap[tokenName] = `${boundingBox[key][prop]}`
-        console.log("token value ", tokenName)
+        brandingStyleMap[tokenName] = `${boundingBox[key][prop]}`;
       }
     }
-    console.log("branding style map ", brandingStyleMap)
     return brandingStyleMap
   }
 }
 
-const GlobalTheme = {
-  defaultColor: "#0176D3"
-}
-
 let brandingStyleMap = {}
 let brandingButtonStyleMap = {};
-globalButtonStyles.forEach((style) => {
-  let buttonMixin = new ButtonMixin(style.id, style)
-  const styleMap = buttonMixin.comuputeStyles()
-  brandingButtonStyleMap[style.style] = styleMap;
-  brandingStyleMap = Object.assign(brandingStyleMap, styleMap)
-})
-//generating global theme tokens
-for (let key in GlobalTheme) {
-  let tokenName = `--${globalNamespace}-${kebabCase(key)}`
-  globalTokens[tokenName] = GlobalTheme[key]
-}
 
 /**
  * Returns a formatted CSS string for all of the branding property key/value pairs
@@ -369,15 +293,10 @@ function getOrCreateStyleTag(styleTagId) {
     window.document.head.append(styleTag)
   }
 
-  return styleTag
+  return styleTag;
 }
 
 function updateAppLevelCSSVars() {
-  console.log(
-    "number of globalTokens ",
-    Object.keys(globalTokens).length,
-    globalTokens
-  )
   brandingStyleMap = Object.assign(brandingStyleMap, globalTokens)
   // generate token -> branding value map
   const brandingTag = getOrCreateStyleTag("theme-branding")
@@ -385,27 +304,27 @@ function updateAppLevelCSSVars() {
   brandingTag.innerHTML = scopedStyleBuilder(":root", brandingStyleMap)
 }
 
-updateAppLevelCSSVars()
+
 
 var updatesCSSVars = function ({ buttonStyle, colorStyle }) {
-  //update the button styles with choosen color style
-  const requiredButtonStyle = globalButtonStyles
-    .map((el) => {
-      if (el.style === buttonStyle) {
-        el.properties.color = globalColorStyles[colorStyle]
-      }
-      return el
-    })
-    .find((el) => el.style === buttonStyle)
-
+  //update the button styles with choosen color style    
+  let requiredButtonStyle;
+  for(let style in globalButtonStyles){
+    if(globalButtonStyles[style].style === buttonStyle){
+        globalButtonStyles[style].properties.color = globalColorStyles[colorStyle];
+        requiredButtonStyle = globalButtonStyles[style];
+    }
+  }
   let buttonMixin = new ButtonMixin(requiredButtonStyle.id, requiredButtonStyle)
-  const styleMap = buttonMixin.comuputeStyles()
+  const styleMap = buttonMixin.comuputeStyles(LIGHTNING_BUTTON)
   brandingButtonStyleMap[requiredButtonStyle.style] = styleMap;
   brandingStyleMap = Object.assign(brandingStyleMap, styleMap)
   updateAppLevelCSSVars();
+  
   const reloadStyleHooksEvt = new CustomEvent('reload-style-hooks', {
     detail: {
-      buttonStyleHooks: brandingButtonStyleMap
+      stylingHooks: brandingStyleMap,
+      themeJSON: ThemeJSON
     }
   });
   window.dispatchEvent(reloadStyleHooksEvt);
@@ -428,17 +347,14 @@ var getContrastColor = function (colorValue) {
 }
 
 var updateThemeColors = function ({ style, color }) {
-  console.log(" update theme color ", style, color)
-  const themeColor = globalColorStyles[style]
+  const themeColor = ThemeJSON[LIGHTNING_COLOR][style]
   themeColor.root = color
   themeColor.contrast = getContrastColor(color)
-  console.log(" theme color found ", themeColor)
-  generateGlobalThemeColorTokens()
+  generateGlobalThemeColorTokens( LIGHTNING_COLOR, ThemeJSON[LIGHTNING_COLOR])
   updateAppLevelCSSVars()
 }
 
 window.addEventListener("reload-styles", (e) => updatesCSSVars(e.detail))
-
 window.addEventListener("update-theme-colors", (e) =>
   updateThemeColors(e.detail)
 )
@@ -468,10 +384,74 @@ function calcDerivedColorValues(
   return newValues
 }
 
-
-const ThemeJSON = {
-  colors: globalColorStyles,
-  lables: textStyles,
-  buttons: globalButtonStyles
+var generateGlobalThemeColorTokens = function (theme, themeColors) {
+  for (let key in themeColors) {
+    const colorStyle = themeColors[key]
+    for (let color in colorStyle) {
+      if (!colorStyle["derived"]) {
+        colorStyle["derived"] = {}
+      }
+      let tokenName = `--${theme.replace("/", "--")}-${kebabCase(key)}-`
+      if (color !== "label" && color !== "id" && color !== "derived") {
+        tokenName += color
+        globalTokens[tokenName] = colorStyle[color]
+        globalColorTokens[`${key}-${color}`] = tokenName
+        const derivedColorValues = calcDerivedColorValues(
+          tokenName,
+          colorStyle[color],
+          colorStyle[color]
+        )
+        colorStyle["derived"][`${key}-${color}`] = derivedColorValues
+      }
+    }
+  }
 }
+
+function getColorTokenValue(key, prop) {
+  if (globalColorTokens[`${key}-${prop}`]) {
+    return `var(${globalColorTokens[`${key}-${prop}`]});`
+  }
+  return
+}
+
+function getDerivedButtonColorToken(key, prop, index) {
+  if (globalColorTokens[`${key}-${prop}`]) {
+    return `var(${globalColorTokens[`${key}-${prop}`]}-${index});`
+  }
+  return
+}
+
+var generateGlobalThemeButtonTokens = function(nameSpace, buttonStyles){
+  for(let style in buttonStyles){
+    let buttonMixin = new ButtonMixin(style, buttonStyles[style]);
+    const styleMap = buttonMixin.comuputeStyles(nameSpace);
+    brandingButtonStyleMap[buttonStyles[style].style] = styleMap;
+    brandingStyleMap = Object.assign(brandingStyleMap, styleMap)
+  }
+}
+
+let ThemeJSON = {
+  brandColor: "#0176D3",
+  "lightning/color" : globalColorStyles,
+  "lightning/button" : globalButtonStyles,
+  lables: textStyles
+}
+const globalNamespace = "lightning"
+
+var generateGlobalThemeTokens = function(themeJSON){
+  for(let theme in themeJSON){
+    if(typeof themeJSON[theme] !== 'object'){
+      let tokenName = `--${globalNamespace}-${kebabCase(theme)}`
+      globalTokens[tokenName] = themeJSON[theme]
+    }else if(theme.includes('color')){
+      generateGlobalThemeColorTokens(theme, themeJSON[theme])
+    }else if(theme.includes('button')){
+      generateGlobalThemeButtonTokens(theme, themeJSON[theme]);
+    }
+  }
+}
+generateGlobalThemeTokens(ThemeJSON);
+updateAppLevelCSSVars();
+
+
 export { globalButtonStyles, globalColorStyles, ThemeJSON , brandingStyleMap as stylingHooks, brandingButtonStyleMap as buttonStyleHooks}

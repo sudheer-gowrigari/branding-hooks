@@ -10,18 +10,6 @@
         </div>
     </header>
     <main>
-        <div class="slds-grid slds-align_absolute-center">
-            <div class="slds-col slds-size_1-of-2" style="max-height: 300px;overflow:scroll;">
-                <lightning-tabset>
-                    <lightning-tab label="Theme JSON" >
-                        <pre class="theme-json" lwc:dom="manual"></pre>
-                    </lightning-tab>
-                    <lightning-tab label="Style Hooks" onactive={handleStyleHooksActive}>
-                        <pre class="style-hooks" lwc:dom="manual"></pre>
-                    </lightning-tab>
-                </lightning-tabset>
-            </div>
-        </div>
         <div class="slds-grid slds-gutters">
             <div class="slds-col slds-size_1-of-6">
                 <lightning-layout>
@@ -38,59 +26,57 @@
                     </lightning-layout-item>
                 </lightning-layout>
             </div>
-            <div class="slds-col slds-size_1-of-6">
+            <div class="slds-col slds-size_1-of-4">
                 <template if:true={showColorSettings}>
-                    <lightning-layout>
-                        <lightning-layout-item>
-                            <lightning-vertical-navigation selected-item={selectedThemeColorSetting}
-                                onselect={handleThemeColorSelect} class="navigation" compact>
-                                <lightning-vertical-navigation-section label=" ">
-                                    <template for:each={themeColors} for:item="setting">
-                                        <lightning-vertical-navigation-item key={setting.id} label={setting.label}
-                                            name={setting.id}></lightning-vertical-navigation-item>
-                                    </template>
-                                </lightning-vertical-navigation-section>
-                            </lightning-vertical-navigation>
-                        </lightning-layout-item>
-                    </lightning-layout>
+                    <div class="slds-align_absolute-center">
+                        <lightning-combobox
+                            name="colorStyles"
+                            label=" "
+                            value={selectedThemeColorSetting}
+                            placeholder="Choose color styles"
+                            options={themeColorComboBoxValues}
+                            onchange={handleThemeColorComboBoxSelect} >
+                        </lightning-combobox>
+                    </div>
+                    <div class="" style="width:105%">
+                        <demo-color-themes color-styles={themeColors} active-theme-color={selectedThemeColorSetting}></demo-color-themes>
+                    </div>
                 </template>
                 <template if:true={showButtonStyles}>
-                    <lightning-layout>
-                        <lightning-layout-item>
-                            <lightning-vertical-navigation selected-item={selectedButtonSetting}
-                                onselect={handleButtonSettingSelect} class="navigation" compact>
-                                <lightning-vertical-navigation-section label=" ">
-                                    <template for:each={buttonStyles} for:item="setting">
-                                        <lightning-vertical-navigation-item key={setting.id} label={setting.label}
-                                            name={setting.style}></lightning-vertical-navigation-item>
-                                    </template>
-                                </lightning-vertical-navigation-section>
-                            </lightning-vertical-navigation>
-                        </lightning-layout-item>
-                    </lightning-layout>
-                </template>
-            </div>
-            <div class="slds-col slds-size_1-of-3" style="border-right: 1px solid #e7e7e7;">
-                <lightning-layout-item padding="around-medium">
-                    <template if:true={showColorSettings}>
-                        <demo-color-themes color-styles={themeColors} active-theme-color={selectedThemeColorSetting}>
-                        </demo-color-themes>
-                    </template>
-                    <template if:true={showButtonThemes}>
+                    <div class="" style="width: 40%;">
+                        <lightning-combobox
+                            name="buttonStyles"
+                            label=" "
+                            value={selectedButtonSetting}
+                            placeholder="Choose button style"
+                            options={themeButtonStylesComboBoxValues}
+                            onchange={handleThemeButtonStyleComboBoxSelect} >
+                        </lightning-combobox>
+                    </div>
+                    <div class="">
                         <demo-button-styles button-styles={buttonStyles} active-button-style={selectedButtonSetting}
                             theme-styles={themeStyles}></demo-button-styles>
-                    </template>
-                </lightning-layout-item>
+                    </div>
+                </template>
             </div>
-            <template if:true={showButtonPreview}>
-                <div class="slds-col">
-                    <lightning-layout-item padding="around-medium">
+            <div class="slds-col slds-size_1-of-6 slds-m-top_xx-large" style="border-right: 1px solid #e7e7e7;">
+                <template if:true={showButtonPreview}>
+                    <div class="slds-m-left_xx-large slds-m-top_xx-large">
                         <demo-button-preview button-styles={buttonStyles} active-button-style={selectedButtonSetting}>
                         </demo-button-preview>
-                        <pre class="button-style-hooks" lwc:dom="manual"></pre>
-                    </lightning-layout-item>
-                </div>
-            </template>
+                    </div>
+                </template>
+            </div>
+            <div class="slds-col">
+                <lightning-tabset>
+                    <lightning-tab label="Theme JSON" >
+                        <pre class="theme-json json-data" lwc:dom="manual"></pre>
+                    </lightning-tab>
+                    <lightning-tab label="Style Hooks" onactive={populateStyleHooks}>
+                        <pre class="style-hooks json-data" lwc:dom="manual"></pre>
+                    </lightning-tab>
+                </lightning-tabset>
+            </div>
         </div>
     </main>
 

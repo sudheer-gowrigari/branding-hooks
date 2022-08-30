@@ -49,3 +49,7 @@ header {
 .color-brand {
   color: #2b8dbf;
 }
+.json-data{
+  height: 55vh;
+  overflow: scroll;
+}

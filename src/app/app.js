@@ -6,7 +6,6 @@ export default class App extends LightningElement {
   selectedButtonSetting = "NeutralButton"
   selectedThemeColorSetting = "base"
   currentContent = "typography"
-  _globalButtonStyles = globalButtonStyles
   _showButtonStyles = false;
   _showButtonThemes = false;
   _showColorSettings = false
@@ -23,14 +22,13 @@ export default class App extends LightningElement {
     }
   ]
   connectedCallback(){
-    window.addEventListener("reload-style-hooks", (e) => this.populateButtonStyleHooks(e.detail))
+    window.addEventListener("reload-style-hooks", (e) => this.updateThemeStyles(e.detail))
   }
   disconnectedCallback(){
-    window.removeEventListener("reload-style-hooks", this.populateButtonStyleHooks)
+    window.removeEventListener("reload-style-hooks", this.updateThemeStyles)
   }
   renderedCallback(){
-    this.populateThemeJSON();
-    this.populateButtonStyleHooks();
+    this.updateThemeStyles();
   }
 
   get themeSettings() {
@@ -38,7 +36,21 @@ export default class App extends LightningElement {
   }
 
   get buttonStyles() {
-    return this._globalButtonStyles;
+    let _buttonStyles = []
+    for (let buttonStyle in globalButtonStyles) {
+      _buttonStyles.push(Object.assign({}, globalButtonStyles[buttonStyle]))
+    }
+    return _buttonStyles;
+  }
+
+  get themeButtonStylesComboBoxValues(){
+      let buttonThemeStyles = [];
+      for(let style in globalButtonStyles){
+        let themeStyle = Object.assign({}, globalButtonStyles[style])
+        themeStyle.value =  globalButtonStyles[style].style;
+        buttonThemeStyles.push(themeStyle);
+      }
+      return buttonThemeStyles;
   }
 
   get buttonThemeStyleHooks(){
@@ -56,6 +68,16 @@ export default class App extends LightningElement {
     }
     console.log(" theme color ", _themeColors)
     return _themeColors
+  }
+
+  get themeColorComboBoxValues(){
+    let colorThemeStyles = [];
+    for(let style in globalColorStyles){
+      let themeStyle = Object.assign({}, globalColorStyles[style])
+      themeStyle.value =  style ;
+      colorThemeStyles.push(themeStyle);
+    }
+    return colorThemeStyles;
   }
 
   get showButtonPreview() {
@@ -89,23 +111,31 @@ export default class App extends LightningElement {
     const selected = evt.detail.name
     this.selectedThemeColorSetting = selected
   }
+  handleThemeColorComboBoxSelect(evt){
+    const selected = evt.detail.value;
+    this.selectedThemeColorSetting = selected
+  }
+  handleThemeButtonStyleComboBoxSelect(evt){
+    const selected = evt.detail.value;
+    this.selectedButtonSetting = selected
+  }
   handleButtonSettingSelect(event) {
     const selected = event.detail.name
     this.selectedButtonSetting = selected
   }
 
-  populateThemeJSON(){
+  populateThemeJSON(detail){
     const options = {
       collapsed: true,
       rootCollapsable: false,
       withQuotes: true,
       withLinks: true
     };
-    const themeJson = this.template.querySelector('pre.theme-json');
-    $(themeJson).jsonViewer(ThemeJSON, options);
+    const themeJsonEl = this.template.querySelector('pre.theme-json');
+    $(themeJsonEl).jsonViewer((detail?.themeJSON || ThemeJSON), options);
   }
 
-  handleStyleHooksActive(){
+  populateStyleHooks(detail){
     const options = {
       collapsed: true,
       rootCollapsable: false,
@@ -114,7 +144,10 @@ export default class App extends LightningElement {
     };
     setTimeout(() => {
       const styleHooks = this.template.querySelector('pre.style-hooks');
-      $(styleHooks).jsonViewer(stylingHooks, options);
+      if(!styleHooks){
+        return;
+      }
+      $(styleHooks).jsonViewer((detail?.stylingHooks || stylingHooks), options);
     });
   }
 
@@ -135,5 +168,9 @@ export default class App extends LightningElement {
     const hooks = JSON.parse(JSON.stringify(styleHooks[this.selectedButtonSetting]));
     const styleHook = this.template.querySelector('pre.button-style-hooks');
     $(styleHook).jsonViewer(hooks, options);
+  }
+  updateThemeStyles(detail){
+    this.populateThemeJSON(detail);
+    this.populateStyleHooks(detail);
   }
 }
