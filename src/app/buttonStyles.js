@@ -320,7 +320,9 @@ var updatesCSSVars = function ({ buttonStyle, colorStyle }) {
   brandingButtonStyleMap[requiredButtonStyle.style] = styleMap;
   brandingStyleMap = Object.assign(brandingStyleMap, styleMap)
   updateAppLevelCSSVars();
-  
+  reloadStyleHooks(brandingStyleMap);
+}
+var reloadStyleHooks = function(brandingStyleMap){
   const reloadStyleHooksEvt = new CustomEvent('reload-style-hooks', {
     detail: {
       stylingHooks: brandingStyleMap,
@@ -352,6 +354,7 @@ var updateThemeColors = function ({ style, color }) {
   themeColor.contrast = getContrastColor(color)
   generateGlobalThemeColorTokens( LIGHTNING_COLOR, ThemeJSON[LIGHTNING_COLOR])
   updateAppLevelCSSVars()
+  reloadStyleHooks(brandingStyleMap);
 }
 
 window.addEventListener("reload-styles", (e) => updatesCSSVars(e.detail))
