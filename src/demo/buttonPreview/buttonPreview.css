@@ -19,7 +19,7 @@ button{
 .slds-button--neutral,
 .slds-button_neutral {
   background-color: var(--sds-c-button-neutral-color-background, var(--lightning--button-neutral-color-root, #fff));
-  border-color: var(--sds-c-button-neutral-color-border, var(--lightning--color-scheme-neutral-root-1, #aeaeae));
+  border-color: var(--sds-c-button-neutral-color-border, var(--lightning--button-neutral-color-root, var(--lightning--color-scheme-neutral-root-1, #aeaeae)));
   color: var(--sds-c-button-brand-text-color, var(--lightning--button-neutral-color-contrast, #fff));
   transition: var(--dxp-c-button-neutral-transition);
 }
