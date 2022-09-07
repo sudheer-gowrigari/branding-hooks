@@ -8,18 +8,18 @@ button{
 }
 .slds-button:focus,
 .slds-button:hover {
-  color: var(--sds-c-button-text-color-hover, var(--dxp-s-button-color-hover, var(--lightning--color-primary-accent-root-1, #014486)));
+  color: var(--sds-c-button-text-color-hover, var(--dxp-s-button-color-hover, var(--lightning--color-scheme-primary-accent-root-1, #014486)));
 }
 .slds-button:focus {
-  box-shadow: var(--sds-c-button-shadow-focus, 0 0 3px var(--dxp-s-button-color-focus, var(--lightning--color-primary-accent-root-1, #0176d3)));
+  box-shadow: var(--sds-c-button-shadow-focus, 0 0 3px var(--dxp-s-button-color-focus, var(--lightning--color-scheme-primary-accent-root-1, #0176d3)));
 }
 .slds-button:active {
-  color: var(--sds-c-button-text-color-active, var(--dxp-s-button-color-active, var(--lightning--color-primary-accent-root-1, #014486)));
+  color: var(--sds-c-button-text-color-active, var(--dxp-s-button-color-active, var(--lightning--color-scheme-primary-accent-root-1, #014486)));
 }
 .slds-button--neutral,
 .slds-button_neutral {
   background-color: var(--sds-c-button-neutral-color-background, var(--lightning--button-neutral-color-root, #fff));
-  border-color: var(--sds-c-button-neutral-color-border, var(--lightning--color-neutral-root-1, #aeaeae));
+  border-color: var(--sds-c-button-neutral-color-border, var(--lightning--color-scheme-neutral-root-1, #aeaeae));
   color: var(--sds-c-button-brand-text-color, var(--lightning--button-neutral-color-contrast, #fff));
   transition: var(--dxp-c-button-neutral-transition);
 }
@@ -27,16 +27,16 @@ button{
 .slds-button--neutral:hover,
 .slds-button_neutral:focus,
 .slds-button_neutral:hover {
-  background-color: var(--sds-c-button-neutral-color-background-hover, var(--lightning--button-neutral-color-root-1, var(--lightning--color-base-root-1, #f3f3f3)));
-  border-color: var(--sds-c-button-neutral-color-border-hover, var(--lightning--button-neutral-color-root-1, var(--lightning--color-neutral-root-2, #aeaeae)));
-  color: var(--sds-c-button-brand-text-color-hover, var(--lightning--button-neutral-color-contrast-1, var(--lightning--color-neutral-contrast-1, #fff)));
+  background-color: var(--sds-c-button-neutral-color-background-hover, var(--lightning--button-neutral-color-root-1, var(--lightning--color-scheme-base-root-1, #f3f3f3)));
+  border-color: var(--sds-c-button-neutral-color-border-hover, var(--lightning--button-neutral-color-root-1, var(--lightning--color-scheme-neutral-root-2, #aeaeae)));
+  color: var(--sds-c-button-brand-text-color-hover, var(--lightning--button-neutral-color-contrast-1, var(--lightning--color-scheme-neutral-contrast-1, #fff)));
   
 }
 .slds-button--neutral:active,
 .slds-button_neutral:active {
-  background-color: var(--sds-c-button-neutral-color-background-active, var(--lightning--button-neutral-color-root-1, var(--lightning--color-base-root-1, #e5e5e5)));
-  border-color: var(--sds-c-button-neutral-color-border-active, var(--lightning--button-neutral-color-root-1, var(--lightning--color-neutral-root-2, #aeaeae)));
-  color: var(--sds-c-button-text-color-active, var(--lightning--button-neutral-color-contrast-1, var(--lightning--color-primary-accent-root-1, #014486)));
+  background-color: var(--sds-c-button-neutral-color-background-active, var(--lightning--button-neutral-color-root-1, var(--lightning--color-scheme-base-root-1, #e5e5e5)));
+  border-color: var(--sds-c-button-neutral-color-border-active, var(--lightning--button-neutral-color-root-1, var(--lightning--color-scheme-neutral-root-2, #aeaeae)));
+  color: var(--sds-c-button-text-color-active, var(--lightning--button-neutral-color-contrast-1, var(--lightning--color-scheme-primary-accent-root-1, #014486)));
 }
 .slds-button--brand,
 .slds-button_brand {
@@ -49,14 +49,14 @@ button{
 .slds-button--brand:hover,
 .slds-button_brand:focus,
 .slds-button_brand:hover {
-  background-color: var(--sds-c-button-brand-color-background-hover, var(--lightning--button-brand-color-root-1, var(--lightning--color-primary-accent-root-1, #014486)));
-  border-color: var(--sds-c-button-brand-color-border-hover, var(--lightning--button-brand-color-root-1, var(--lightning--color-primary-accent-root-1, #014486)));
+  background-color: var(--sds-c-button-brand-color-background-hover, var(--lightning--button-brand-color-root-1, var(--lightning--color-scheme-primary-accent-root-1, #014486)));
+  border-color: var(--sds-c-button-brand-color-border-hover, var(--lightning--button-brand-color-root-1, var(--lightning--color-scheme-primary-accent-root-1, #014486)));
   color: var(--sds-c-button-brand-text-color-hover, var(--lightning--button-brand-color-contrast-1, var(--lightning-brand-color-contrast-1, #fff)));
 }
 .slds-button--brand:active,
 .slds-button_brand:active {
-  background-color: var(--sds-c-button-brand-color-background-active, var(--lightning--button-brand-color-root-1, var(--lightning--color-primary-accent-root-1, #014486)));
-  border-color: var(--sds-c-button-brand-color-border-active, var(--lightning--button-brand-color-root-1, var(--lightning--color-primary-accent-root-1, #014486)));
+  background-color: var(--sds-c-button-brand-color-background-active, var(--lightning--button-brand-color-root-1, var(--lightning--color-scheme-primary-accent-root-1, #014486)));
+  border-color: var(--sds-c-button-brand-color-border-active, var(--lightning--button-brand-color-root-1, var(--lightning--color-scheme-primary-accent-root-1, #014486)));
   color: var(--sds-c-button-brand-text-color-active, var(--lightning--button-brand-color-contrast-1, var(--lightning-brand-color-contrast-1, #fff)));
 }
 
@@ -71,15 +71,15 @@ button{
 .slds-button--destructive:hover,
 .slds-button_destructive:focus,
 .slds-button_destructive:hover {
-  background-color: var(--sds-c-button-destructive-color-background-hover,var(--lightning--button-destructive-color-root-1, var(--lightning--color-destructive-root-1, #ba0517)));
-  border-color: var(--sds-c-button-destructive-color-border-hover, var(--lightning--button-destructive-color-root-1, var(--lightning--color-destructive-root-1, #ba0517)));
-  color: var(--sds-c-button-destructive-text-color-hover,var(--lightning--button-destructive-color-contrast-1, var(--lightning--color-destructive-contrast-1, #fff)));
+  background-color: var(--sds-c-button-destructive-color-background-hover,var(--lightning--button-destructive-color-root-1, var(--lightning--color-scheme-destructive-root-1, #ba0517)));
+  border-color: var(--sds-c-button-destructive-color-border-hover, var(--lightning--button-destructive-color-root-1, var(--lightning--color-scheme-destructive-root-1, #ba0517)));
+  color: var(--sds-c-button-destructive-text-color-hover,var(--lightning--button-destructive-color-contrast-1, var(--lightning--color-scheme-destructive-contrast-1, #fff)));
 }
 .slds-button--destructive:active,
 .slds-button_destructive:active {
-  background-color: var(--sds-c-button-destructive-color-background-active,var(--lightning--button-destructive-color-root-1, var(--lightning--color-destructive-root-1, #8e030f)));
-  border-color: var(--sds-c-button-destructive-color-border-active,var(--lightning--button-destructive-color-root-1, var(--lightning--color-destructive-root-1, #8e030f)));
-  color: var(--sds-c-button-destructive-text-color-active,var(--lightning--button-destructive-color-contrast-1, var(--lightning--color-destructive-contrast-1, #fff)));
+  background-color: var(--sds-c-button-destructive-color-background-active,var(--lightning--button-destructive-color-root-1, var(--lightning--color-scheme-destructive-root-1, #8e030f)));
+  border-color: var(--sds-c-button-destructive-color-border-active,var(--lightning--button-destructive-color-root-1, var(--lightning--color-scheme-destructive-root-1, #8e030f)));
+  color: var(--sds-c-button-destructive-text-color-active,var(--lightning--button-destructive-color-contrast-1, var(--lightning--color-scheme-destructive-contrast-1, #fff)));
 }
 
 .slds-button--success,
@@ -93,15 +93,15 @@ button{
 .slds-button--success:hover,
 .slds-button_success:focus,
 .slds-button_success:hover {
-  background-color: var(--sds-c-button-success-color-background-hover, var(--lightning--button-success-color-root-1, var(--lightning--color-success-root-1, #2e844a)));
-  border-color: var(--sds-c-button-success-color-border-hover, var(--lightning--button-success-color-root-1, var(--lightning--color-success-root-1, #2e844a)));
-  color: var(--sds-c-button-success-text-color-hover, var(--lightning--button-success-color-contrast-1, var(--lightning--color-success-contrast-1, #fff)));
+  background-color: var(--sds-c-button-success-color-background-hover, var(--lightning--button-success-color-root-1, var(--lightning--color-scheme-success-root-1, #2e844a)));
+  border-color: var(--sds-c-button-success-color-border-hover, var(--lightning--button-success-color-root-1, var(--lightning--color-scheme-success-root-1, #2e844a)));
+  color: var(--sds-c-button-success-text-color-hover, var(--lightning--button-success-color-contrast-1, var(--lightning--color-scheme-success-contrast-1, #fff)));
 }
 .slds-button--success:active,
 .slds-button_success:active {
-  background-color: var(--sds-c-button-success-color-background-active,var(--lightning--button-success-color-root-1, var(--lightning--color-success-root-1, #2e844a)));
-  border-color: var(--sds-c-button-success-color-border-active,var(--lightning--button-success-color-root-1, var(--lightning--color-success-root-1, #2e844a)));
-  color: var(--sds-c-button-success-text-color-active,var(--lightning--button-success-color-contrast-1, var(--lightning--color-success-contrast-1, #fff)));
+  background-color: var(--sds-c-button-success-color-background-active,var(--lightning--button-success-color-root-1, var(--lightning--color-scheme-success-root-1, #2e844a)));
+  border-color: var(--sds-c-button-success-color-border-active,var(--lightning--button-success-color-root-1, var(--lightning--color-scheme-success-root-1, #2e844a)));
+  color: var(--sds-c-button-success-text-color-active,var(--lightning--button-success-color-contrast-1, var(--lightning--color-scheme-success-contrast-1, #fff)));
 }
 /* Standard Button */
 /* .slds-button {

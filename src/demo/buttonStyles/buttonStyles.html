@@ -1,16 +1,29 @@
 <template>
     <lightning-accordion allow-multiple-sections-open onsectiontoggle={handleSectionToggle} active-section-name={activeSections}>
         <lightning-accordion-section name="A" label="Color">
-            <div class="slds-align_absolute-center" style="width: 35%;">
-                <lightning-combobox
-                    name="colorStyles"
-                    label=" "
-                    value={selectedColorStyle}
-                    placeholder="Choose color styles"
-                    options={colorStyles}
-                    onchange={handleColorStyleChange} >
-                </lightning-combobox>
+            <div class="slds-grid slds-align_absolute-center">
+                <div class="slds-col slds-size_5-of-12">
+                    <lightning-combobox
+                        name="colorStyles"
+                        label=" "
+                        value={selectedColorStyle}
+                        placeholder="Choose color styles"
+                        options={colorStyles}
+                        disabled={disableThemeColors}
+                        onchange={handleColorStyleChange} >
+                    </lightning-combobox>
+                </div>
+                <div class="slds-col slds-p-top_medium">
+                    <lightning-input type="checkbox" label="Override brand color" name="input1" onchange={handleOverrideClick}></lightning-input>
+                </div>
             </div>
+            <template if:true={showCustomColorPicker}>
+                <div class="slds-grid slds-align_absolute-center slds-m-top_large">
+                    <div class="slds-col slds-size_5-of-12">
+                        <lightning-input type="color" name="backgroundColor" value={selectedColorStyle} label="Choose custom color" onchange={handleColorChange}></lightning-input>
+                    </div>
+                </div>
+            </template>
         </lightning-accordion-section>
 
         <lightning-accordion-section name="B" label="Typography">
